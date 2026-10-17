@@ -1,0 +1,13 @@
+services:
+  bot:
+    build: .
+    restart: unless-stopped
+    environment:
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:?set TELEGRAM_BOT_TOKEN}
+      GROQ_API_KEY: ${GROQ_API_KEY:?set GROQ_API_KEY}
+      GROQ_MODEL: ${GROQ_MODEL:-openai/gpt-oss-120b}
+      DB_PATH: /data/bot.db
+    volumes:
+      - bot_data:/data
+volumes:
+  bot_data:
